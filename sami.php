@@ -1,18 +1,4 @@
 <?php
-function connexion(){
-$login ="root";
-$mdp="root";
-$host="localhost";
-$dbname="empdept";
-$link=mysqli_connect($host,$login,$mdp,$dbname);
-if (!$link){
-  echo "erreur de connexion";
-}
-else{
-   echo "";
-}
-return $link;
-}
 function getEmp() {
   $link = connexion();
   if($link){
@@ -83,7 +69,7 @@ function getAllDept(){
           }
         }
       }
-  function getAllJob();{
+  function getAllJob(){
     $link = connexion();
     if($link){
       $req="select distinct(job) from emp";
@@ -91,17 +77,13 @@ function getAllDept(){
       $tab = [];
       if(!$res){
         echo "probleme sur la requete";
-      }
-      else{
-        $i=0;
-        while ($row = mysqli_fetch_array($res)) {
-          $tab[$i] = $row[0];
-          $i++;
-        }
-      }
-      else{
-        echo"il y a un probleme";
+      } else {
+            $i=0;
+            while ($row = mysqli_fetch_array($res)) {
+              $tab[$i] = $row[0];
+              $i++;
+            }
       }
       return $tab;
   }
-?>
+}
