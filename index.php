@@ -49,13 +49,30 @@
     <input type="text" name="salaire" placeholder="Salaire de l'employée" required/></br></br>
     <input type="text" name="comm" placeholder="Commission" required/></br></br>
     <select name="deptno">
-    </select><br><br>
+    <?php
+      $tab = getAllNameDept();
+      if($tab){
+        foreach ($tab as $key => $value) {
+          ?>
+          <option value"<?php echo $value; ?>"> <?php echo $value; ?> </option>
+          <?php
+        }
+      }
+      else{
+        ?>
+        <option value="null"> No Dept </option>
+        <?php
+      } ?>
+    </select> <br> <br>
     <input type="submit" Value="Ajouter" name="ajouteremp">
     <input type="reset" Value="Vider" name="vider">
     </form>
 
 </div>
      <?php
+     if(isset($_POST['ajouteremp'])){
+     addEmp();
+     }
      if(isset($_POST['ajouter'])){
      addDept();
      }

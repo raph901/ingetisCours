@@ -87,3 +87,29 @@ function getAllDept(){
       return $tab;
   }
 }
+
+function getAllNameDept(){
+  $link = connexion();
+  if($link){
+    $req="select * from dept";
+    $res=mysqli_query($link,$req);
+    $tab = [];
+    if(!$res){
+      echo "probleme sur la requete";
+    } else {
+          $i=0;
+          while ($row = mysqli_fetch_array($res)) {
+            $tab[$i] = $row[0];
+            $tab[$i] = $row[1];
+            $i++;
+          }
+    }
+    return $tab;
+}
+}
+
+function addEmp(){
+
+
+  
+}
