@@ -2,7 +2,7 @@
 
 function connexion(){
 $login ="root";
-$mdp="";
+$mdp="root";
 $host="localhost";
 $dbname="empdept";
 $link=mysqli_connect($host,$login,$mdp,$dbname);
@@ -84,4 +84,25 @@ function getAllDept(){
           }
         }
       }
+  function getAllJob();{
+    $link = connexion();
+    if($link){
+      $req="select distinct(job) from emp";
+      $res=mysqli_query($link,$req);
+      $tab = [];
+      if(!$res){
+        echo "probleme sur la requete";
+      }
+      else{
+        $i=0;
+        while ($row = mysqli_fetch_array($res)) {
+          $tab[$i] = $row[0];
+          $i++;
+        }
+      }
+      else{
+        echo"il y a un probleme";
+      }
+      return $tab;
+  }
 ?>
