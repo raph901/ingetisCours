@@ -63,7 +63,7 @@
         <option value="null"> No Dept </option>
         <?php
       } ?>
-    </select> <br> <br>
+    </select> <br> <br> 
     <input type="submit" Value="Ajouter" name="ajouteremp">
     <input type="reset" Value="Vider" name="vider">
     </form>
