@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="tableau.css">
     <title></title>
     <?php
-include_once("sami.php");
+    include_once("log.php");
+    include_once("sami.php");
      ?>
   </head>
   <body>
@@ -15,25 +16,28 @@ include_once("sami.php");
      ?>
    </div>
    <div class="addDept">
-       <form action="#" method="post">
-       <input type="text" name="deptno" placeholder="Numéro de département" required /></br></br>
-       <input type="text" name="dname" placeholder="Nom de département" required /></br></br>
-       <input type="text" name="loc" placeholder="Adresse de département" required/></br></br>
-       <input type="submit" Value="Ajouter" name="ajouter">
-     </form>
+    <h2>Ajout d'un departement</h2>
+    <form action="#" method="post">
+    <input type="text" name="deptno" placeholder="Numéro de département" required /></br></br>
+    <input type="text" name="dname" placeholder="Nom de département" required /></br></br>
+    <input type="text" name="loc" placeholder="Adresse de département" required/></br></br>
+    <input type="submit" Value="Ajouter" name="ajouter">
+    </form>
+
+    <h2>Ajout d'un employé</h2>
+    <form action="#" method="post">
+    <input type="text" name="deptno" placeholder="Numéro de département" required /></br></br>
+    <input type="text" name="dname" placeholder="Nom de département" required /></br></br>
+    <input type="text" name="loc" placeholder="Adresse de département" required/></br></br>
+    <input type="submit" Value="Ajouter" name="ajouter">
+    </form>
+
+</div>
      <?php
      if(isset($_POST['ajouter'])){
      addDept();
      }
      getAllDept();
       ?>
-     </div>
-
-     <form action="#" method="post">
-     <input type="text" name="deptno" placeholder="Numéro de département" required /></br></br>
-     <input type="text" name="dname" placeholder="Nom de département" required /></br></br>
-     <input type="text" name="loc" placeholder="Adresse de département" required/></br></br>
-     <input type="submit" Value="Ajouter" name="ajouter">
-   </form>
   </body>
 </html>
