@@ -63,7 +63,7 @@ function getAllDept(){
                 $tab[$i][0][0] =$row[0];
                 $tab[$i][0][1] =$row[1];
                 $tab[$i][0][2] =$row[2];
-                $i++
+                $i++;
             }
           }
         }
