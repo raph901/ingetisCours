@@ -53,21 +53,21 @@ function getAllDept(){
     if($link){
       $req="select * from dept";
       $res=mysqli_query($link,$req);
+      $tab = [];
       if(!$res){
         echo "probleme sur la requete";
       }
       else {
-            echo "<table class='table'> <tr> <th>Deptno</th> <th>dname</th> <th>LOC</th> </tr>";
+            $i=0;
             while ($row = mysqli_fetch_array($res)) {
-                echo "<tr style=\"border:2px solid black\">"
-                ."<td>".$row[0]."</td>"
-                ."<td>".$row[1]."</td>"
-                ."<td>".$row[2]."</td>"
-                ."</tr>";
+                $tab[$i][0][0] =$row[0];
+                $tab[$i][0][1] =$row[1];
+                $tab[$i][0][2] =$row[2];
+                $i++
             }
-            echo "</table>";
           }
         }
+        return $tab;
       }
   function getAllJob(){
     $link = connexion();

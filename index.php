@@ -59,7 +59,24 @@
      if(isset($_POST['ajouter'])){
      addDept();
      }
-     getAllDept();
+     $tab = getAllDept();
+     if($tab) {
+       ?>
+       <table>
+         <tr><th>DEPTNO</th><th>DNAME</th><th>LOC</th></tr>
+         <?php
+         for($i=0;$i< sizeof($tab);$i++){
+           ?>
+           <tr>
+            <td> <?php echo $tab[$i][0][0]; ?></td>
+            <td> <?php echo $tab[$i][0][1]; ?></td>
+            <td> <?php echo $tab[$i][0][2]; ?></td>
+            <?php
+         }
+         ?>
+       </table>
+       <?php
+     }
       ?>
   </body>
 </html>
