@@ -26,15 +26,3 @@ letter-spacing: 1px;
 font-family: sans-serif;
 font-size: .8rem;
 }
-.listeEmp{
-  margin-right: 10em;
-  width: 24em;
-}
-.addDept{
-  width: 20em;
-}
-.addDept,.listeEmp
-{
-  display: inline-block;
-  vertical-align: top;
-}
