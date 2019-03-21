@@ -108,3 +108,15 @@ function getAllMgr(){
 }
 return $tab;
 }
+
+function addEmp(){
+    //Recuperation de tout les valeurs
+       //connextion a la base de donnee jj
+       //ques les selesman ont  des commissions
+       // salaire >0
+       //empno existe deja
+       //new user deptno = mgr DEPTNO
+       // if date = null done hiredate = now ()
+var x = 9;
+
+}
