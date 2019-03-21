@@ -86,9 +86,6 @@ function getAllDept()
           return $tab;
       }
   }
-function addEmp()
-{
-}
 
 function getAllMgr(){
   $link = connexion();
@@ -105,7 +102,8 @@ function getAllMgr(){
         $tab[$i][0] = $row[0];
         $tab[$i][1] = $row[1];
         $tab[$i][2] = $row[2];
-        $i++
+        $i++;
       }
   }
+}
 }
