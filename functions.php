@@ -106,4 +106,5 @@ function getAllMgr(){
       }
   }
 }
+return $tab;
 }

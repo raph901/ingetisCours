@@ -52,7 +52,7 @@
                 </select> <br> <br>
 
                 <!-- <input type="search" name="mgr" placeholder="Manageur" required/></br></br> -->
-                <!-- <input list="mgr" type="search" placeholder="Manageur" required/>
+                <input list="mgr" type="search" placeholder="Manageur" required/>
                 <datalist id="mgr">
                   <?php
                   $tabMgr = getAllMgr();
@@ -64,11 +64,12 @@
                       </option><?php
                     }
                   }
-                  else{?>
+                  else{
+                    ?>
                     <option value"null">No Mgr</option>
-                    <?php { ?>
+                  <?php } ?>
                 </datalist>
-                </br></br> -->
+                </br></br> 
 
 
                 <input type="date" name="hiredate" placeholder="Date de recrutement" required/></br></br>
