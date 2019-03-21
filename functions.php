@@ -89,3 +89,23 @@ function getAllDept()
 function addEmp()
 {
 }
+
+function getAllMgr(){
+  $link = connexion();
+  if ($link){
+    $req = "select empno,ename, job from emp";
+    $res=mysqli_query($link, $req);
+    $tab = [];
+    if (!$res) {
+        echo "probleme sur la requete";
+    }
+    else {
+      $i=0;
+      while($row = mysqli_fetch_array($res)){
+        $tab[$i][0] = $row[0];
+        $tab[$i][1] = $row[1];
+        $tab[$i][2] = $row[2];
+        $i++
+      }
+  }
+}

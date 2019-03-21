@@ -50,7 +50,23 @@
                         <?php
                     } ?>
                 </select> <br> <br>
-                <input type="search" name="mgr" placeholder="Manageur" required/></br></br>
+                <input list="mgr" type="text" placeholder="Manageur" required/>
+                <datalist id="mgr">
+                  <?php
+                  $tabMgr = getAllMgr();
+                  if ($tabMgr){
+                    $longueur = sizeof($tabMgr);
+                    for ($i = 0;$i< $longueur;$i++){ ?>
+                      <option value="<?php echo $tabMgr[$i][0]?>">
+                        <?php echo $tabMgr[$i][1]." ".$tabMgr[$i][2]; ?>
+                      </option><?php
+                    }
+                  }
+                  else{?>
+                    <option value"null">No Mgr</option>
+                    <?php { ?>
+                </datalist>
+                </br></br>
                 <input type="date" name="hiredate" placeholder="Date de recrutement" required/></br></br>
                 <input type="text" name="salaire" placeholder="Salaire de l'employée" required/></br></br>
                 <input type="text" name="comm" placeholder="Commission" required/></br></br>
