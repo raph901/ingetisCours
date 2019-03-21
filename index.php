@@ -50,6 +50,7 @@
                         <?php
                     } ?>
                 </select> <br> <br>
+                <!--  -->
                 <input type="search" name="mgr" placeholder="Manageur" required/></br></br>
                 <input type="date" name="hiredate" placeholder="Date de recrutement" required/></br></br>
                 <input type="text" name="salaire" placeholder="Salaire de l'employée" required/></br></br>
