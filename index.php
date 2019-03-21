@@ -56,11 +56,11 @@
                 <input type="text" name="comm" placeholder="Commission" required/></br></br>
                 <select name="deptno">
                     <?php
-                    $tab = getAllNameDept();
+                    $tab = getAllDept();
                     if ($tab) {
                         foreach ($tab as $key => $value) {
                             ?>
-                            <option value"<?php echo $value; ?>"> <?php echo $value; ?> </option>
+                            <option value"<?php echo $value[0]; ?>"> <?php echo $value[1]." ".$value[2]; ?> </option>
                             <?php
                         }
                     } else {
@@ -99,9 +99,9 @@
                 for ($i=0;$i< sizeof($tab);$i++) {
                     ?>
                     <tr>
-                        <td> <?php echo $tab[$i][0][0]; ?></td>
-                        <td> <?php echo $tab[$i][0][1]; ?></td>
-                        <td> <?php echo $tab[$i][0][2]; ?></td>
+                        <td> <?php echo $tab[$i][0]; ?></td>
+                        <td> <?php echo $tab[$i][1]; ?></td>
+                        <td> <?php echo $tab[$i][2]; ?></td>
                         <?php
                 } ?>
                 </table>
