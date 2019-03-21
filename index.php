@@ -61,10 +61,10 @@
                         <?php echo $tabMgr[$i][1]." ".$tabMgr[$i][2]; ?>
                       </option><?php
                     }
-                  }
                   else{?>
                     <option value"null">No Mgr</option>
-                    <?php { ?>
+                  <?php }
+                } ?>
                 </datalist>
                 </br></br>
                 <input type="date" name="hiredate" placeholder="Date de recrutement" required/></br></br>
