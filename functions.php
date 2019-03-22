@@ -50,7 +50,7 @@ function getAllDept()
 {
     $link = connexion();
     if ($link) {
-        $req="select * from dept";
+        $req="select deptno,dname,loc from dept";
         $res=mysqli_query($link, $req);
         $tab = [];
         if (!$res) {
@@ -71,7 +71,7 @@ function getAllDept()
   {
       $link = connexion();
       if ($link) {
-          $req="select distinct(job) from emp";
+          $req="select distinct(job) from emp where job != 'PRESIDENT'";
           $res=mysqli_query($link, $req);
           $tab = [];
           if (!$res) {
@@ -87,36 +87,108 @@ function getAllDept()
       }
   }
 
-function getAllMgr(){
-  $link = connexion();
-  if ($link){
-    $req = "select empno,ename, job from emp";
-    $res=mysqli_query($link, $req);
-    $tab = [];
-    if (!$res) {
-        echo "probleme sur la requete";
+function getAllMgr()
+{
+    $link = connexion();
+    if ($link) {
+        $req = "select empno,ename, job from emp";
+        $res=mysqli_query($link, $req);
+        $tab = [];
+        if (!$res) {
+            echo "probleme sur la requete";
+        } else {
+            $i=0;
+            while ($row = mysqli_fetch_array($res)) {
+                $tab[$i][0] = $row[0];
+                $tab[$i][1] = $row[1];
+                $tab[$i][2] = $row[2];
+                $i++;
+            }
+        }
+    }
+    return $tab;
+}
+
+function addEmp()
+{
+    //Recuperation de tout les valeurs
+    $empno = $_POST['empno'];
+    $ename = $_POST['ename'];
+    $job = $_POST['job'];
+    $mgr = $_POST['mgr_choice'];
+    $hiredate = $_POST['hiredate'];
+    $salaire = $_POST['salaire'];
+    $comm = $_POST['comm'];
+    $deptno = $_POST['deptno'];
+    //connextion a la base de donnee jj
+    $link = connexion();
+    if ($link) {
+
+     //empno existe deja
+        $req="select empno from emp where empno = $empno";
+        if (!($empno == $req)) {
+            // salaire >0
+            if ($salaire > 0) {
+                //new user deptno = mgr DEPTNO
+                $reqmgr="select deptno from emp where $mgr";
+                if ($deptno == $reqmgr) {
+                    //que les salesman ont  des commissions
+                    if ($comm != null && $job == "SALESMAN") {
+                        // if date = null done hiredate = now ()
+                        if ($hiredate == null) {
+                            $req1 = "INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,now(),$salaire,$comm,$deptno)";
+                            $res1 =mysqli_query($link, $req1);
+                            if ($res1) {
+                                echo "insertion reussite hiredate null";
+                            } else {
+                                //echo "INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,now(),$salaire,null,$deptno)";
+                                echo "insert pas passé $empno,$ename,$job,$mgr,now(),$salaire,null,$deptno ";
+                            }
+                        } else {
+                            $req1 ="INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,$hiredate,$salaire,$comm ,$deptno)";
+                            $res1 =mysqli_query($link, $req1);
+                            if ($res1) {
+                                echo "insertion reussite";
+                            }
+                        }
+                    }
+                    elseif ($job != "SALESMAN" && $comm == null) {
+                        if ($hiredate == null) {
+                            $req1 = "INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,now(),$salaire,null,$deptno)";
+                            $res1 =mysqli_query($link, $req1);
+                            if ($res1) {
+                                echo "insertion reussite hiredate null";
+                            } else {
+                                //echo "INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,now(),$salaire,null,$deptno)";
+                                echo "insert pas passé $empno,$ename,$job,$mgr,now(),$salaire,null,$deptno ";
+                            }
+                        } else {
+                            $req1 ="INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,$hiredate,$salaire,null,$deptno)";
+                            $res1 =mysqli_query($link, $req1);
+                            if ($res1) {
+                                echo "insertion reussite";
+                            } else {
+                                echo "insert pas passé ";
+                            }
+                        }
+                    }
+                    else {
+                      echo "ça marche pas ici";
+                    }
+                }
+                else {
+                  echo "Le manageur ne fait pas partie du même departement que l'employé ou inversement";
+                }
+            }
+            else {
+              echo "Le Salaire est de 0 ou moins";
+            }
+        }
+        else {
+          echo "Le Numero d'employée $empno est déja utilisé";
+        }
     }
     else {
-      $i=0;
-      while($row = mysqli_fetch_array($res)){
-        $tab[$i][0] = $row[0];
-        $tab[$i][1] = $row[1];
-        $tab[$i][2] = $row[2];
-        $i++;
-      }
-  }
-}
-return $tab;
-}
-
-function addEmp(){
-    //Recuperation de tout les valeurs
-       //connextion a la base de donnee jj
-       //ques les selesman ont  des commissions
-       // salaire >0
-       //empno existe deja
-       //new user deptno = mgr DEPTNO
-       // if date = null done hiredate = now ()
-var x = 9;
-
+      echo "Link out";
+    }
 }
