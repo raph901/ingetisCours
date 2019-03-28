@@ -60,7 +60,7 @@
                       $longueur = sizeof($tabMgr);
                       for ($i = 0;$i< $longueur;$i++) {
                           ?>
-                      <option value="<?php echo $tabMgr[$i][0]?>">
+                      <option data-value="<?php echo $tabMgr[$i][0]?>">
                         <?php echo $tabMgr[$i][1]." ".$tabMgr[$i][2]; ?>
                       </option><?php
                       }
