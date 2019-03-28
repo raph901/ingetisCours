@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="tableau.css">
     <title>Page d'accueil</title>
+    <script type="text/javascript" src="pedale.js"></script>
     <?php
     include_once("log.php");
     include_once("functions.php");
@@ -52,36 +53,36 @@
                 </select> <br> <br>
 
                 <!-- <input type="search" name="mgr" placeholder="Manageur" required/></br></br> -->
-                <input list="mgr" type="search" name="mgr_choice" placeholder="Manageur" required/>
+                <input list="mgr" type="search" placeholder="Manageur" required/>
                 <datalist id="mgr">
                   <?php
                   $tabMgr = getAllMgr();
-                  if ($tabMgr) {
-                      $longueur = sizeof($tabMgr);
-                      for ($i = 0;$i< $longueur;$i++) {
-                          ?>
-                      <option data-value="<?php echo $tabMgr[$i][0]?>">
+                  if ($tabMgr){
+                    $longueur = sizeof($tabMgr);
+                    for ($i = 0;$i< $longueur;$i++){ ?>
+                      <option value="<?php echo $tabMgr[$i][0]?>">
                         <?php echo $tabMgr[$i][1]." ".$tabMgr[$i][2]; ?>
                       </option><?php
-                      }
-                  } else {
-                      ?>
-                    <option value="null">No Mgr</option>
-                  <?php
-                  } ?>
+                    }
+                  }
+                  else{
+                    ?>
+                    <option value"null">No Mgr</option>
+                  <?php } ?>
                 </datalist>
                 </br></br>
-                <input type="date" name="hiredate" placeholder="Date de recrutement" /></br></br>
+
+
+                <input type="date" name="hiredate" placeholder="Date de recrutement" required/></br></br>
                 <input type="text" name="salaire" placeholder="Salaire de l'employée" required/></br></br>
-                <input type="text" name="comm" placeholder="Commission" /></br></br>
+                <input type="text" name="comm" placeholder="Commission" required/></br></br>
                 <select name="deptno">
                     <?php
                     $tab = getAllDept();
                     if ($tab) {
-                      $longueurdept = sizeof($tab);
-                        for ($i = 0;$i< $longueurdept;$i++) {
+                        foreach ($tab as $key => $value) {
                             ?>
-                            <option value="<?php echo $tab[$i][0]; ?>"> <?php echo $tab[$i][1]." ".$tab[$i][2]; ?> </option>
+                            <option value"<?php echo $value[0]; ?>"> <?php echo $value[1]." ".$value[2]; ?> </option>
                             <?php
                         }
                     } else {
@@ -93,10 +94,6 @@
                 <input type="submit" Value="Ajouter" name="ajouteremp">
                 <input type="reset" Value="Vider" name="vider">
             </form>
-            <br>
-            <?php if (isset($_POST['ajouteremp'])) {
-                            addEmp();
-                        } ?>
         </div>
         <div class="col">
             <?php
@@ -140,7 +137,9 @@
 </html>
 
 <?php
-
+if (isset($_POST['ajouteremp'])) {
+                addEmp();
+            }
 if (isset($_POST['ajouter'])) {
     addDept();
 }
