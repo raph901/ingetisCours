@@ -1,6 +1,7 @@
 <?php
 session_start();
-function getEmp(){
+function getEmp()
+{
     $link = connexion();
     if ($link) {
         $req="select * from emp";
@@ -9,7 +10,7 @@ function getEmp(){
             echo "probleme sur la requete";
         } else {
             echo "<table>";
-            echo "<tr>"."<th>nom</th>"."<th>metier</th>"."<th>mgr</th>"."<th>date</th>"."<th>salaire</th>"."<th>commission</th>"."</tr>";
+            echo "<tr>"."<th>Nom</th>"."<th>Metier</th>"."<th>Mgr</th>"."<th>Date</th>"."<th>Salaire</th>"."<th>Commission</th>"."<th>Update</th>"."</tr>";
             while ($row = mysqli_fetch_array($res)) {
                 echo "<tr style=\"border:2px solid black\">"
               ."<td>".$row[1]."</td>"
@@ -18,7 +19,8 @@ function getEmp(){
               ."<td>".$row[4]."</td>"
               ."<td>".$row[5]."</td>"
               ."<td>".$row[6]."</td>"
-              ."<td><fotm action='' method='post'>
+              ."<td>
+              <form action='' method='post'>
               <input type ='hidden' name='idEmp' value='".$row[0]."'/>
               <input type ='submit' name='update' value='update'/>
               </from>
@@ -29,7 +31,8 @@ function getEmp(){
         }
     }
 }
-function addDept(){
+function addDept()
+{
     $deptno = $_POST['deptno'];
     $dname = $_POST['dname'];
     $loc = $_POST['loc'];
@@ -91,7 +94,8 @@ function getAllDept()
       }
   }
 
-function getAllMgr(){
+function getAllMgr()
+{
     $link = connexion();
     if ($link) {
         $req = "select empno,ename, job from emp";
@@ -154,8 +158,7 @@ function addEmp()
                                 echo "insertion reussite";
                             }
                         }
-                    }
-                    elseif ($job != "SALESMAN" && $comm == null) {
+                    } elseif ($job != "SALESMAN" && $comm == null) {
                         if ($hiredate == null) {
                             $req1 = "INSERT INTO `emp` (`empno`, `ename`, `job`, `mgr`, `hiredate`, `sal`,`comm`, `deptno`) VALUES ($empno,'$ename','$job',$mgr,now(),$salaire,null,$deptno)";
                             $res1 =mysqli_query($link, $req1);
@@ -174,61 +177,57 @@ function addEmp()
                                 echo "insert pas passé ";
                             }
                         }
+                    } else {
+                        echo "ça marche pas ici";
                     }
-                    else {
-                      echo "ça marche pas ici";
-                    }
+                } else {
+                    echo "Le manageur ne fait pas partie du même departement que l'employé ou inversement";
                 }
-                else {
-                  echo "Le manageur ne fait pas partie du même departement que l'employé ou inversement";
-                }
+            } else {
+                echo "Le Salaire est de 0 ou moins";
             }
-            else {
-              echo "Le Salaire est de 0 ou moins";
-            }
+        } else {
+            echo "Le Numero d'employée $empno est déja utilisé";
         }
-        else {
-          echo "Le Numero d'employée $empno est déja utilisé";
+    } else {
+        echo "Link out";
+    }
+}
+    function updateUserById()
+    {
+        $id =$_POST['idEmp'];
+        // recuperer les information de la base de donnees
+        $link = connexion();
+        if ($link) {
+            //partie externaliser
+            $tab = getEmpById($link, $id);
+            if ($tab) {
+                $_SESSION['connectedUser'] = $tab;
+            }
+            if (isset($_SESSION['connectedUser'])) {
+                header('location:updateemp.php');
+            } else {
+                echo "un probleme est survenu contacter l'administrateur  de votre site";
+            }
         }
     }
-    else {
-      echo "Link out";
-    }
-  }
-    function updateUserById(){
-      $id =$_POST['idEmp'];
-      // recuperer les information de la base de donnees
-      $link = connexion();
-      if ($link) {
-        //partie externaliser
-        $tab=getElementById($link,$id);
-        if($tab){
-        $_SESSION['connectedUser'] = $tab;
-      }
-            if(isset($_SESSION['connectedUser'])){
-              header('location:updateemp.php');
-            }
-            else {
-              echo "un probleme est survenu contacter l'administrateur  de votre site";
-            }
-          }
-        }
       //rederiger vers la page de modification
 
-      function getEmpById($link,$id){
-      $req="select * from emp where empno= $id";
-      $res=mysqli_query($link, $req);
-      $row =mysqli_fetch_array($res,MYSQLI_NUM);
-      $tab = [];
-      if (!$res) {
-          echo "probleme sur la requete";
-      } else {
-  //changer les donnée dans la session_cache_expire
-        $longueur = sizeof($row);
-            for($i=0;$i<$longueur;$i++){
-              $tab[$i]=$row[$i];
-            }
-          $_SESSION['connectedUser'] = $tab;
-        }
-        return $tab;
-  }
+      function getEmpById($link, $id)
+      {
+          $req="select * from emp where empno= $id";
+          $res=mysqli_query($link, $req);
+          $row =mysqli_fetch_array($res, MYSQLI_NUM);
+          $tab = [];
+          if (!$res) {
+              echo "probleme sur la requete";
+          } else {
+              //changer les donnée dans la session_cache_expire
+              $longueur = sizeof($row);
+              for ($i=0;$i<$longueur;$i++) {
+                  $tab[$i]=$row[$i];
+              }
+              $_SESSION['connectedUser'] = $tab;
+          }
+          return $tab;
+      }

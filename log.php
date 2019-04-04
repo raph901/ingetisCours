@@ -1,7 +1,7 @@
 <?php
 function connexion(){
 $login ="root";
-$mdp="";
+$mdp="root";
 $host="localhost";
 $dbname="empdept";
 $link=mysqli_connect($host,$login,$mdp,$dbname);
