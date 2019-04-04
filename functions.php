@@ -1,6 +1,6 @@
 <?php
-function getEmp()
-{
+session_start();
+function getEmp(){
     $link = connexion();
     if ($link) {
         $req="select * from emp";
@@ -19,7 +19,7 @@ function getEmp()
               ."<td>".$row[5]."</td>"
               ."<td>".$row[6]."</td>"
               ."<td><fotm action='' method='post'>
-              <input type ='hidden' name='id' value='".$row[0]."'/>
+              <input type ='hidden' name='idEmp' value='".$row[0]."'/>
               <input type ='submit' name='update' value='update'/>
               </from>
               </td>
@@ -29,8 +29,7 @@ function getEmp()
         }
     }
 }
-function addDept()
-{
+function addDept(){
     $deptno = $_POST['deptno'];
     $dname = $_POST['dname'];
     $loc = $_POST['loc'];
@@ -92,8 +91,7 @@ function getAllDept()
       }
   }
 
-function getAllMgr()
-{
+function getAllMgr(){
     $link = connexion();
     if ($link) {
         $req = "select empno,ename, job from emp";
@@ -196,4 +194,41 @@ function addEmp()
     else {
       echo "Link out";
     }
-}
+  }
+    function updateUserById(){
+      $id =$_POST['idEmp'];
+      // recuperer les information de la base de donnees
+      $link = connexion();
+      if ($link) {
+        //partie externaliser
+        $tab=getElementById($link,$id);
+        if($tab){
+        $_SESSION['connectedUser'] = $tab;
+      }
+            if(isset($_SESSION['connectedUser'])){
+              header('location:updateemp.php');
+            }
+            else {
+              echo "un probleme est survenu contacter l'administrateur  de votre site";
+            }
+          }
+        }
+      //rederiger vers la page de modification
+
+      function getEmpById($link,$id){
+      $req="select * from emp where empno= $id";
+      $res=mysqli_query($link, $req);
+      $row =mysqli_fetch_array($res,MYSQLI_NUM);
+      $tab = [];
+      if (!$res) {
+          echo "probleme sur la requete";
+      } else {
+  //changer les donnée dans la session_cache_expire
+        $longueur = sizeof($row);
+            for($i=0;$i<$longueur;$i++){
+              $tab[$i]=$row[$i];
+            }
+          $_SESSION['connectedUser'] = $tab;
+        }
+        return $tab;
+  }

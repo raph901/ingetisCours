@@ -9,6 +9,9 @@
     <?php
     include_once("log.php");
     include_once("functions.php");
+    if(isset($_POST['update'])){
+      updateUserById();
+    }
      ?>
   </head>
   <body>
