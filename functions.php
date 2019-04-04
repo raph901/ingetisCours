@@ -18,7 +18,12 @@ function getEmp()
               ."<td>".$row[4]."</td>"
               ."<td>".$row[5]."</td>"
               ."<td>".$row[6]."</td>"
-              ."</tr>";
+              ."<td><fotm action='' method='post'>
+              <input type ='hidden' name='id' value='".$row[0]."'/>
+              <input type ='submit' name='update' value='update'/>
+              </from>
+              </td>
+              </tr>";
             }
             echo "</table>";
         }

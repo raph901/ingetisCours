@@ -75,7 +75,7 @@
 
                 <input type="date" name="hiredate" placeholder="Date de recrutement" required/></br></br>
                 <input type="text" name="salaire" placeholder="Salaire de l'employée" required/></br></br>
-                <input type="text" name="comm" placeholder="Commission" required/></br></br>
+                <input type="text" name="comm" id="commission" placeholder="Commission" required/></br></br>
                 <select name="deptno">
                     <?php
                     $tab = getAllDept();
